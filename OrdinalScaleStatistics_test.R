@@ -14,6 +14,8 @@ suppressPackageStartupMessages(source('OrdinalScaleStatistics_PowerAnalyses_Func
 
 mingrade=0; maxgrade=3
 grades=mingrade:maxgrade
+
+set.seed(1994)
 controls=sample(grades, size=50,replace = T, prob = rep(x = 1,length(grades)))
 exp1=sample(grades, size=30,replace = T, prob = c(rep(x = 1,floor(length(grades)/2)), rep(x = 5,length(grades)-floor(length(grades)/2))))
 exp2=sample(grades, size=40,replace = T, prob = rep(x = 1,length(grades)))
