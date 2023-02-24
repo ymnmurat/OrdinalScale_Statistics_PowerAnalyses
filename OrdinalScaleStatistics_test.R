@@ -8,6 +8,9 @@
 # - 3: samples with severe levels of the phenotype of interest
 # We will assign uniform distribution for our control samples, while assigning skewed distributions to capture differences versus the control group
 rm(list=ls())
+gc()
+
+suppressPackageStartupMessages(source('OrdinalScaleStatistics_PowerAnalyses_Functions.R'))
 
 mingrade=0; maxgrade=3
 grades=mingrade:maxgrade
