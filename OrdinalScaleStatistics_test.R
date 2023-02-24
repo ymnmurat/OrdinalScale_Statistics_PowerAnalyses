@@ -2,7 +2,7 @@
 #February 23, 2023 - Murat Yaman
 
 #Here, we are going to generate a dummy data for ordinal scale analyses. Accordingly, a grade range between 0 and 3 will be utilized. In this regard, you can consider 
-# - 0: Samples that do not show no signs, 
+# - 0: Samples that do not show any signs of effect, 
 # - 1: Samples with minor signs, 
 # - 2: Samples with mild levels of effect
 # - 3: samples with severe levels of the phenotype of interest
