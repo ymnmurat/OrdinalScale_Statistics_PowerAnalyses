@@ -44,11 +44,23 @@ ordinalScaleStats=function(dataset,refgroup=NULL,decreasingGrades=T,dummie=F, sh
       
       rm(filenames)
       
-      signs=statdetails[,c('contrast', 'adj.p.value')]
+      if (length(levels(dataset_long$Exposures)<=2)) {signs=statdetails[,c('contrast', 'p.value')]
+      colnames(signs)=c('contrast', 'adj.p.value')
+        
+      } else{signs=statdetails[,c('contrast', 'adj.p.value')]}
+      
       signs$Exposures=gsub(paste0(' - ', refgroup), '',signs$contrast)
+      require(stringr)
+      
+      signs$Exposures[startsWith(signs$Exposures,'(')&endsWith(signs$Exposures,')')]=str_sub(signs$Exposures[startsWith(signs$Exposures,'(')&endsWith(signs$Exposures,')')],2,-2)
+      
       tmp_sign=as.data.frame(matrix(nrow = 1, ncol = 3,data = c(refgroup,NA,refgroup))); colnames(tmp_sign)=colnames(signs)
+      
       signs=rbind(tmp_sign, signs);signs$adj.p.value=as.numeric(signs$adj.p.value)
-      signs$adj.p.value=round(signs$adj.p.value,3)
+      if (!0%in%round(signs$adj.p.value,3)) {
+        signs$adj.p.value=round(signs$adj.p.value,3)
+      } 
+      
       
       dataset=merge(dataset,signs,all.x=T, by='Exposures')
       dataset=dataset%>%mutate(signif=case_when(is.na(adj.p.value)~'',
